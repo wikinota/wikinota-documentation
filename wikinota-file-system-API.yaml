@@ -1,0 +1,56 @@
+swagger: "2.0"
+info:
+  description: "The WikiNota API."
+  version: "0.0.1"
+  title: "WikiNota API"
+  contact:
+    email: "wikinota@i5h.eu"
+  license:
+    name: "AGLP 3.0"
+    url: "https://github.com/wikinota/wikinota-documentation/blob/master/LICENSE"
+# host: "petstore.swagger.io"
+basePath: "/v1"
+tags:
+- name: "item sync"
+  description: "for Syncing items"
+schemes:
+- "https"
+paths:
+  /item:
+    post:
+      tags:
+      - "item sync"
+      summary: "Add a new pet to the store"
+      description: ""
+      consumes:
+      - "application/json"
+      produces:
+      - "application/json"
+      parameters:
+      - in: "body"
+        schema:
+          $ref: "#/definitions/WikiNotaItem"
+      responses:
+        200:
+          description: "Was saved!"
+        405:
+          description: "Invalid input"
+definitions:
+  WikiNotaItem:
+    type: "object"
+    properties:
+      hash:
+        type: "string"
+        description: "Not encrypted current SHA256 hash of data"
+      id:
+        type: "string"
+        description: "Not encrypted id of data (not uniqe)"
+      time:
+        type: "string"
+        description: "timestamp UTC of creation"
+      previousHash:
+        type: "string"
+        description: "Not previous current SHA256 hash of data"
+      data:
+        type: "object"
+        description: "encrypted payload of item"
